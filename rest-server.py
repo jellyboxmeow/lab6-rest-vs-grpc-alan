@@ -5,6 +5,8 @@ import jsonpickle
 from PIL import Image
 import io
 import argparse
+# ADDED base64
+import base64
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -51,12 +53,49 @@ def rawimage():
 
 @app.route('/api/dotproduct', methods=['POST'])
 def dotproduct():
-    pass
+    data = request.get_json()
+    a_list = data.get("a")
+    b_list = data.get("b")
+    val = 0
+    for i in range(len(a_list)):
+        val += a_list[i]*b_list[i]
+    
+    response = {'dotproduct': str(val)}
+    response_pickled = jsonpickle.encode(response)
+    return Response(
+        response=response_pickled,
+        status=200,
+        mimetype="application/json"
+    )
+    # pass
 
 
 @app.route('/api/jsonimage', methods=['POST'])
 def jsonimage():
-    pass
+    data = request.get_json()
+    b64img = data["image"]
+    img_bytes = base64.b64decode(b64img.encode("utf-8"))
+
+    # Convert the data to a PIL image type so we can extract dimensions
+    try:
+        ioBuffer = io.BytesIO(img_bytes)
+        img = Image.open(ioBuffer)
+
+        response = {
+            'width': img.size[0],
+            'height': img.size[1]
+        }
+    except:
+        response = {'width': 0, 'height': 0}
+        
+    # response = {'jsonimage': str()}
+    response_pickled = jsonpickle.encode(response)
+    return Response(
+        response=response_pickled,
+        status=200,
+        mimetype="application/json"
+    )
+    # pass
 
 
 if __name__ == '__main__':

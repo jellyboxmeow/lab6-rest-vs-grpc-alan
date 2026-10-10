@@ -1,0 +1,12 @@
+// service Add {
+//     rpc add(addMsg) returns (addReply) {}
+// }
+// service RawImage {
+//     rpc rawimage(rawImageMsg) returns (imageReply) {}
+// }
+// service DotProduct {
+//     rpc dotproduct(dotProductMsg) returns (dotProductReply) {}
+// }
+// service JsonImage {
+//     rpc jsonimage(jsonImageMsg) returns (imageReply) {}
+// }

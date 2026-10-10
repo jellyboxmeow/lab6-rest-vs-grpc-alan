@@ -51,7 +51,7 @@ When you're done, edit a file `SOLUTION.md` that includes a table showing the ti
 
 
 |  Method 	| Local  	| Same-Zone  	|  Different Region 	|
-|---	|---	|---	|---	|---	|
+|---	|---	|---	|---	|
 |   REST add	|   	|   	|  	|
 |   gRPC add	|   	|   	|    	|
 |   REST rawimg	|   	|   	|   	|
