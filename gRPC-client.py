@@ -18,6 +18,9 @@ import lab6_pb2
 import lab6_pb2_grpc
 
 ####################################################################
+channel = grpc.insecure_channel(addr)
+stub = lab6_pb2_grpc.Lab6ServStub(channel)
+
 def make_add_msg(num1, num2):
     return lab6_pb2.addMsg(
         a = num1,
@@ -50,37 +53,37 @@ def make_json_msg():
 
 
 def doAdd(addr, debug=False):
-    with grpc.insecure_channel(addr) as channel:
-        stub = lab6_pb2_grpc.Lab6ServStub(channel)
-        add_msg = make_add_msg(5, 10)
-        add_reply = stub.add(add_msg)
-        if debug:
-            print(f"Add message worked, got {add_reply.sum} as response")
+    # with grpc.insecure_channel(addr) as channel:
+    #     stub = lab6_pb2_grpc.Lab6ServStub(channel)
+    add_msg = make_add_msg(5, 10)
+    add_reply = stub.add(add_msg)
+    if debug:
+        print(f"Add message worked, got {add_reply.sum} as response")
 
 def doRawImage(addr, debug=False):
-    with grpc.insecure_channel(addr) as channel:
-        stub = lab6_pb2_grpc.Lab6ServStub(channel)
-        rawImage_msg = make_raw_msg()
-        raw_imageReply = stub.rawimage(rawImage_msg)
-        if debug:
-            print(f"Raw Image message worked, got w: {raw_imageReply.width}, h: {raw_imageReply.height}")
+    # with grpc.insecure_channel(addr) as channel:
+    #     stub = lab6_pb2_grpc.Lab6ServStub(channel)
+    rawImage_msg = make_raw_msg()
+    raw_imageReply = stub.rawimage(rawImage_msg)
+    if debug:
+        print(f"Raw Image message worked, got w: {raw_imageReply.width}, h: {raw_imageReply.height}")
 
 def doDotProduct(addr, debug=False):
-    with grpc.insecure_channel(addr) as channel:
-        stub = lab6_pb2_grpc.Lab6ServStub(channel)
-        dot_msg = make_dot_msg()
-        dot_reply = stub.dotproduct(dot_msg)
-        if debug:
-            print(f"Dot message worked got {dot_reply.dotproduct} as response")
+    # with grpc.insecure_channel(addr) as channel:
+    #     stub = lab6_pb2_grpc.Lab6ServStub(channel)
+    dot_msg = make_dot_msg()
+    dot_reply = stub.dotproduct(dot_msg)
+    if debug:
+        print(f"Dot message worked got {dot_reply.dotproduct} as response")
 
 
 def doJsonImage(addr, debug=False):
-    with grpc.insecure_channel(addr) as channel:
-        stub = lab6_pb2_grpc.Lab6ServStub(channel)
-        jsonImage_msg = make_json_msg()
-        json_imageReply = stub.jsonimage(jsonImage_msg)
-        if debug:
-            print(f"Json Image message worked, got w: {json_imageReply.width}, h: {json_imageReply.height}")
+    # with grpc.insecure_channel(addr) as channel:
+    #     stub = lab6_pb2_grpc.Lab6ServStub(channel)
+    jsonImage_msg = make_json_msg()
+    json_imageReply = stub.jsonimage(jsonImage_msg)
+    if debug:
+        print(f"Json Image message worked, got w: {json_imageReply.width}, h: {json_imageReply.height}")
 
 # def run():
 #     with grpc.insecure_channel("localhost:5000") as channel:
@@ -209,3 +212,5 @@ elif args.cmd == 'dotProduct':
 
     delta = ((time.perf_counter() - start) / args.reps) * 1000
     print("Took", delta, "ms per operation")
+
+channel.close()

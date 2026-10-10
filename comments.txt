@@ -10,3 +10,16 @@
 // service JsonImage {
 //     rpc jsonimage(jsonImageMsg) returns (imageReply) {}
 // }
+
+curl -LsSf https://astral.sh/uv/install.sh | sh
+pip install grpcio
+pip install protobuf
+pip install jsonpickle
+
+uv run rest-client.py 10.138.15.201 add 100
+uv run rest-client.py 10.138.15.201 rawImage 100
+uv run rest-client.py 10.138.15.201 dotProduct 100
+uv run rest-client.py 10.138.15.201 jsonImage 100
+
+python3 rest-client.py 10.138.15.201 add 100
+python3 rest-client.py 10.138.15.201 rawImage 100
