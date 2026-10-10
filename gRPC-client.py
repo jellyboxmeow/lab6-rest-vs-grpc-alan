@@ -18,8 +18,6 @@ import lab6_pb2
 import lab6_pb2_grpc
 
 ####################################################################
-channel = grpc.insecure_channel(addr)
-stub = lab6_pb2_grpc.Lab6ServStub(channel)
 
 def make_add_msg(num1, num2):
     return lab6_pb2.addMsg(
@@ -165,6 +163,8 @@ addr = f"{args.host}:{args.port}"
 
 print(f"Running {args.reps} reps against {addr}")
 
+channel = grpc.insecure_channel(addr)
+stub = lab6_pb2_grpc.Lab6ServStub(channel)
 
 # ---------------------------------------------------------
 # Perform requested operation
