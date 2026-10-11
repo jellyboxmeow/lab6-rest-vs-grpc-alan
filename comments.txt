@@ -17,11 +17,25 @@ pip install protobuf
 pip install jsonpickle
 pip install pillow
 source $HOME/.local/bin/env
+git clone https://github.com/jellyboxmeow/lab6-rest-vs-grpc-alan.git
+cd lab6-rest-vs-grpc-alan
 
 uv run rest-client.py 10.138.15.201 add 100
 uv run rest-client.py 10.138.15.201 rawImage 100
 uv run rest-client.py 10.138.15.201 dotProduct 100
 uv run rest-client.py 10.138.15.201 jsonImage 100
 
-python3 rest-client.py 10.138.15.201 add 100
-python3 rest-client.py 10.138.15.201 rawImage 100
+python3 gRPC-client.py localhost add 1000
+python3 gRPC-client.py localhost rawImage 1000
+python3 gRPC-client.py localhost dotProduct 1000
+python3 gRPC-client.py localhost jsonImage 1000
+
+python3 gRPC-client.py 10.138.15.206 add 1000
+python3 gRPC-client.py 10.138.15.206 rawImage 1000
+python3 gRPC-client.py 10.138.15.206 dotProduct 1000
+python3 gRPC-client.py 10.138.15.206 jsonImage 1000
+
+python3 gRPC-client.py 10.138.15.206 add 100
+python3 gRPC-client.py 10.138.15.206 rawImage 100
+python3 gRPC-client.py 10.138.15.206 dotProduct 100
+python3 gRPC-client.py 10.138.15.206 jsonImage 100
